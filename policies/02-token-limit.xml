@@ -1,0 +1,25 @@
+<!--
+  STEP 2 - Step 1 + per-subscription token limit
+-->
+<policies>
+  <inbound>
+    <base />
+    <set-backend-service backend-id="__BACKEND_ID__" />
+    <authentication-managed-identity resource="https://cognitiveservices.azure.com" />
+    <set-header name="api-key" exists-action="delete" />
+    <llm-token-limit
+      counter-key="@(context.Subscription.Id)"
+      tokens-per-minute="__TOKENS_PER_MINUTE__"
+      estimate-prompt-tokens="true"
+      remaining-tokens-header-name="x-ratelimit-remaining-tokens" />
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>

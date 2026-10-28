@@ -1,0 +1,21 @@
+<!--
+  STEP 1 - Managed identity passthrough
+  Client sends the APIM subscription key in `api-key`; APIM calls Foundry with its own managed identity.
+-->
+<policies>
+  <inbound>
+    <base />
+    <set-backend-service backend-id="__BACKEND_ID__" />
+    <authentication-managed-identity resource="https://cognitiveservices.azure.com" />
+    <set-header name="api-key" exists-action="delete" />
+  </inbound>
+  <backend>
+    <base />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>
