@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Foundry PTU (via APIM)",
+    "vendor": "customendpoint",
+    "apiKey": "${input:apimSubscriptionKey}",
+    "apiType": "chat-completions",
+    "models": [
+      {
+        "id": "gpt-5.5",
+        "name": "GPT-5.5 (PTU)",
+        "url": "https://<your-apim>.azure-api.net/openai/v1/chat/completions",
+        "toolCalling": true,
+        "vision": true,
+        "maxInputTokens": 200000,
+        "maxOutputTokens": 32000,
+        "requestHeaders": {
+          "api-key": "${apiKey}"
+        }
+      },
+      {
+        "id": "gpt-5.6-sol",
+        "name": "GPT-5.6 Sol (PTU)",
+        "url": "https://<your-apim>.azure-api.net/openai/v1/chat/completions",
+        "toolCalling": true,
+        "vision": true,
+        "maxInputTokens": 200000,
+        "maxOutputTokens": 32000,
+        "requestHeaders": {
+          "api-key": "${apiKey}"
+        }
+      }
+    ]
+  }
+]
